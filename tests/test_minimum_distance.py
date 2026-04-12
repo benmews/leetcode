@@ -1,19 +1,17 @@
 from problems.minimum_distance import Solution
 
-
 def test_basic_case():
-    nums = [1, 3, 6, 10]
-    assert Solution().minimum_distance(nums) == 2
+    nums = [1,2,1,1,3]
+    assert Solution().minimum_distance(nums) == 6
 
+def test_two_number_case():
+    nums = [1,1,2,3,2,1,2]
+    assert Solution().minimum_distance(nums) == 8
 
-def test_single_element():
-    assert Solution().minimum_distance([5]) == 0
+def test_neg_case():
+    nums = [1]
+    assert Solution().minimum_distance(nums) == -1
 
-
-def test_empty():
-    assert Solution().minimum_distance([]) == 0
-
-
-def test_negative_numbers():
-    nums = [-10, -3, 0, 4]
-    assert Solution().minimum_distance(nums) == 3
+def test_edge_case():
+    nums = [3,3,3]
+    assert Solution().minimum_distance(nums) == 4
