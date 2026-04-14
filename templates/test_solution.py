@@ -1,4 +1,4 @@
-from problems.template import Solution
+from .solution import Solution
 
 
 def test_example():

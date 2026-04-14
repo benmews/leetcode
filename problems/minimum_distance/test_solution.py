@@ -1,4 +1,4 @@
-from problems.minimum_distance import Solution
+from .solution import Solution
 
 def test_basic_case():
     nums = [1,2,1,1,3]
