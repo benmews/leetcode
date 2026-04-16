@@ -1,0 +1,28 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "New LeetCode Problem",
+            "type": "shell",
+            "command": "${workspaceFolder}/.venv/bin/python",
+            "args": [
+                "${workspaceFolder}/new_problem.py",
+                "${input:problemNumber}"
+            ],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "focus": true
+            },
+            "group": "build"
+        }
+    ],
+    "inputs": [
+        {
+            "id": "problemNumber",
+            "type": "promptString",
+            "description": "LeetCode problem number (e.g. 3740)",
+            "default": ""
+        }
+    ]
+}
