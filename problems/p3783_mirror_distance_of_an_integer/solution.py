@@ -3,4 +3,5 @@
 
 class Solution:
     def mirrorDistance(self, n: int) -> int:
-        pass
+        rev = int(str(n)[::-1]);
+        return abs(n-rev);

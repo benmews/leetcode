@@ -5,7 +5,24 @@
             "label": "New LeetCode Problem: Daily",
             "type": "shell",
             "command": "${workspaceFolder}/.venv/bin/python",
-            "args": ["${workspaceFolder}/new_problem.py"],
+            "args": [
+                "${workspaceFolder}/new_problem.py"
+            ],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "focus": true
+            },
+            "group": "build"
+        },
+        {
+            "label": "New LeetCode Problem: Daily + C++",
+            "type": "shell",
+            "command": "${workspaceFolder}/.venv/bin/python",
+            "args": [
+                "${workspaceFolder}/new_problem.py",
+                "--cpp"
+            ],
             "presentation": {
                 "reveal": "always",
                 "panel": "shared",
@@ -27,6 +44,66 @@
                 "focus": true
             },
             "group": "build"
+        },
+        {
+            "label": "New LeetCode Problem: By Number + C++",
+            "type": "shell",
+            "command": "${workspaceFolder}/.venv/bin/python",
+            "args": [
+                "${workspaceFolder}/new_problem.py",
+                "${input:problemNumber}",
+                "--cpp"
+            ],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "focus": true
+            },
+            "group": "build",
+            "problemMatcher": []
+        },
+        {
+            "label": "Add C++ to Current Problem",
+            "type": "shell",
+            "command": "${workspaceFolder}/.venv/bin/python",
+            "args": [
+                "${workspaceFolder}/new_problem.py",
+                "${input:problemNumber}",
+                "--cpp"
+            ],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "focus": true
+            },
+            "group": "build"
+        },
+        {
+            "label": "Run C++ Tests",
+            "type": "shell",
+            "command": "g++ -std=c++17 -Wall -o '${fileDirname}/test_solution_bin' '${fileDirname}/test_solution.cpp' && '${fileDirname}/test_solution_bin'",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "focus": true
+            },
+            "group": "test",
+            "problemMatcher": "$gcc"
+        },
+        {
+            "label": "Run Python Tests",
+            "type": "shell",
+            "command": "${workspaceFolder}/.venv/bin/pytest",
+            "args": [
+                "-v",
+                "${fileDirname}"
+            ],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "focus": true
+            },
+            "group": "test"
         }
     ],
     "inputs": [
