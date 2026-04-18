@@ -9,6 +9,7 @@ Example: python new_problem.py 3740
 import html
 import json
 import re
+import subprocess
 import sys
 import urllib.error
 import urllib.request
@@ -271,6 +272,19 @@ def main() -> None:
     print(f"    solution.py")
     print(f"    test_solution.py  ({len(example_inputs)} example test(s), {outputs_note})")
     print(f"\n  https://leetcode.com/problems/{slug}/")
+
+    files_to_open = [
+        folder / "problem.md",
+        folder / "solution.py",
+        folder / "test_solution.py",
+    ]
+    try:
+        subprocess.run(
+            ["code", "--reuse-window"] + [str(f) for f in files_to_open if f.exists()],
+            check=True,
+        )
+    except FileNotFoundError:
+        print("\n  (VS Code 'code' CLI not found — open the files manually)")
 
 
 if __name__ == "__main__":
