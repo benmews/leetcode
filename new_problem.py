@@ -245,7 +245,7 @@ def main() -> None:
     content: str = details.get("content") or ""
     example_outputs = extract_outputs(content)
 
-    folder = PROBLEMS_DIR / f"{slug.replace('-', '_')}_{number}"
+    folder = PROBLEMS_DIR / f"p{number}_{slug.replace('-', '_')}"
     if folder.exists():
         raise SystemExit(f"Folder already exists: {folder.relative_to(ROOT)}/")
 
