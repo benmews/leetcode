@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Creates a new LeetCode problem folder and pre-fills solution/test stubs.
 
-Usage:   python new_problem.py <problem_number>
+Usage:   python new_problem.py              # today's daily challenge
+         python new_problem.py <number>     # specific problem
 Example: python new_problem.py 3740
 """
 
@@ -65,6 +66,24 @@ def get_slug(number: int) -> tuple[str, str]:
             return stat["question__title_slug"], stat["question__title"]
     raise SystemExit(f"Problem #{number} not found.")
 
+
+def get_daily() -> tuple[int, str, str]:
+    """Return (number, slug, title) for today's daily challenge."""
+    print("Fetching today's daily challenge ...")
+    query = """
+    query {
+      activeDailyCodingChallengeQuestion {
+        question {
+          questionFrontendId
+          titleSlug
+          title
+        }
+      }
+    }
+    """
+    payload = json.dumps({"query": query}).encode()
+    q = fetch(LC_GRAPHQL, payload)["data"]["activeDailyCodingChallengeQuestion"]["question"]
+    return int(q["questionFrontendId"]), q["titleSlug"], q["title"]
 
 def get_details(slug: str) -> dict:
     print(f"Fetching details for '{slug}' ...")
@@ -210,12 +229,15 @@ def build_tests(
 
 
 def main() -> None:
-    if len(sys.argv) != 2 or not sys.argv[1].isdigit():
+    if len(sys.argv) == 1:
+        number, slug, title = get_daily()
+    elif len(sys.argv) == 2 and sys.argv[1].isdigit():
+        number = int(sys.argv[1])
+        slug, title = get_slug(number)
+    else:
         print(__doc__)
         sys.exit(1)
 
-    number = int(sys.argv[1])
-    slug, title = get_slug(number)
     details = get_details(slug)
 
     meta = json.loads(details.get("metaData") or "{}")

@@ -2,7 +2,19 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "New LeetCode Problem",
+            "label": "New LeetCode Problem: Daily",
+            "type": "shell",
+            "command": "${workspaceFolder}/.venv/bin/python",
+            "args": ["${workspaceFolder}/new_problem.py"],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "focus": true
+            },
+            "group": "build"
+        },
+        {
+            "label": "New LeetCode Problem: By Number",
             "type": "shell",
             "command": "${workspaceFolder}/.venv/bin/python",
             "args": [
