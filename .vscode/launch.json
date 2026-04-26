@@ -9,12 +9,21 @@
       "console": "integratedTerminal"
     },
     {
-      "name": "Run Pytest",
+      "name": "Run Pytest (Workspace)",
       "type": "python",
       "request": "launch",
       "module": "pytest",
       "args": ["-v"],
       "console": "integratedTerminal"
+    },
+    {
+      "name": "Debug Pytest Current Folder",
+      "type": "python",
+      "request": "launch",
+      "module": "pytest",
+      "args": ["-v", "${fileDirname}"],
+      "console": "integratedTerminal",
+      "justMyCode": false
     }
   ]
 }

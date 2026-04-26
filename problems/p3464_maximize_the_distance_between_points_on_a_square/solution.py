@@ -6,7 +6,7 @@ from typing import List
 
 class Solution:
     def maxDistance(self, side: int, points: List[List[int]], k: int) -> int:
-        
+        pass
 
     def distance(self, p1: List[int], p2: List[int]) -> int:
         return abs(p1[0] - p2[0]) + abs(p1[1] - p2[1])
