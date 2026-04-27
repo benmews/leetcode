@@ -12,10 +12,10 @@ class Solution:
         def dfs(i, j, pi, pj):
             if visited[i][j]:
                 return True;
+            visited[i][j] = True;
             nexts = [(i+di, j+dj) for (di, dj) in [(0,1),(1,0),(-1,0),(0,-1)] if 0 <= i+di < n and 0 <= j+dj < m and (i+di, j+dj) != (pi,pj) and grid[i+di][j+dj] == grid[i][j]]
             
             for ni, nj in nexts:
-                visited[ni][nj] = True;
                 if dfs(ni,nj, i, j):
                     return True;
             return False;
