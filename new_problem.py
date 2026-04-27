@@ -268,6 +268,11 @@ def build_tests_py(
         else:
             arg_str = ", ".join(args)
         expected = example_outputs[i - 1] if i - 1 < len(example_outputs) else "..."
+        # LeetCode returns JSON booleans (lowercase); convert to Python literals
+        if expected == "true":
+            expected = "True"
+        elif expected == "false":
+            expected = "False"
         lines.append(
             f"\n\ndef test_example_{i}():\n"
             f"    assert Solution().{func}({arg_str}) == {expected}\n"
