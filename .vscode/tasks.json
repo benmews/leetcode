@@ -95,13 +95,16 @@
             "type": "shell",
             "command": "${workspaceFolder}/.venv/bin/pytest",
             "args": [
-                "-v",
+                "-q",
+                "--tb=short",
                 "${fileDirname}"
             ],
             "presentation": {
                 "reveal": "always",
-                "panel": "shared",
-                "focus": true
+                "panel": "dedicated",
+                "focus": true,
+                "clear": true,
+                "showReuseMessage": false
             },
             "group": "test"
         }

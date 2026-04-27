@@ -23,7 +23,8 @@
       "module": "pytest",
       "args": ["-v", "${fileDirname}"],
       "console": "integratedTerminal",
-      "justMyCode": false
+      "justMyCode": false,
+      "purpose": ["debug-test"]
     }
   ]
 }

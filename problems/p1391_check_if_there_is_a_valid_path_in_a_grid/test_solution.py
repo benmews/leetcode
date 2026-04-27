@@ -12,3 +12,7 @@ def test_example2():
 
 def test_example_3():
     assert Solution().hasValidPath(grid=[[1,1,2]]) == False
+
+
+def test_example_4():
+    assert Solution().hasValidPath(grid=[[1,1,1,1,6],[1,1,1,1,2],[1,1,1,1,2],[1,1,1,1,2],[1,1,1,1,2]]) == False
