@@ -8,25 +8,23 @@ class Solution:
         n = len(grid)
         m = len(grid[0])
         dirs = ((0,1), (1,0))
+        current = [(0,0,0,0)] # (x,y,cost,score)
+        next = []
 
-        def dfs(i, j, usedk, score):
+        while current not empty:
+            for cell in current:
+                for dir in dirs:   
+                    newX = cell[0]+dir[0]
+                    newY = cell[1]+dir[1]
+                    if newX < n and newY < m:
+                        cost = 1 if grid[newX][newY] > 0 else 0
+                        next.append((newX, newY,cell[2]+cost,cell[3]+grid[newX][newY]))
+                current.remove(cell)
+            # merge fields with same x y here
 
-            if i<0 or j <0 or i>=n or j>=m:
-                return -1
-            newk = usedk+1 if grid[i][j] > 0 else usedk+0
+            # if there are contents of current with x=n-1 and y=m-1, then return the one with highest score here
 
-            if newk > k:
-                return -1
+            current = next
+            next = []
 
-            newScore = score + grid[i][j]
-
-            if i == n-1 and j == m-1:
-                return newScore
-            
-            highestContinuation = []
-            for dir in dirs:
-                highestContinuation.append(dfs(i+dir[0], j+dir[1], newk, newScore))
-
-            return max(highestContinuation)
-        
-        return dfs(0,0, 0, 0)
+        return -1
