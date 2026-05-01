@@ -3,28 +3,48 @@
 
 from typing import List
 
+
 class Solution:
     def maxPathScore(self, grid: List[List[int]], k: int) -> int:
         n = len(grid)
         m = len(grid[0])
-        dirs = ((0,1), (1,0))
-        current = [(0,0,0,0)] # (x,y,cost,score)
-        next = []
+        dirs = ((0, 1), (1, 0))
+        current = {(0, 0): {0: 0}}
 
-        while current not empty:
-            for cell in current:
-                for dir in dirs:   
-                    newX = cell[0]+dir[0]
-                    newY = cell[1]+dir[1]
-                    if newX < n and newY < m:
-                        cost = 1 if grid[newX][newY] > 0 else 0
-                        next.append((newX, newY,cell[2]+cost,cell[3]+grid[newX][newY]))
-                current.remove(cell)
-            # merge fields with same x y here
+        def prune_frontier(cost_to_score: dict[int, int]) -> dict[int, int]:
+            pruned: dict[int, int] = {}
+            best_score = -1
 
-            # if there are contents of current with x=n-1 and y=m-1, then return the one with highest score here
+            for cost in sorted(cost_to_score):
+                score = cost_to_score[cost]
+                if score > best_score:
+                    pruned[cost] = score
+                    best_score = score
 
-            current = next
-            next = []
+            return pruned
 
-        return -1
+        for _ in range(n + m - 2):
+            next_states: dict[tuple[int, int], dict[int, int]] = {}
+
+            for (x, y), cost_map in current.items():
+                for cost, score in cost_map.items():
+                    for dx, dy in dirs:
+                        nx, ny = x + dx, y + dy
+                        if nx >= n or ny >= m:
+                            continue
+
+                        new_cost = cost + (1 if grid[nx][ny] > 0 else 0)
+                        if new_cost > k:
+                            continue
+
+                        new_score = score + grid[nx][ny]
+                        bucket = next_states.setdefault((nx, ny), {})
+                        bucket[new_cost] = max(bucket.get(new_cost, -1), new_score)
+
+            current = {
+                cell: prune_frontier(cost_map)
+                for cell, cost_map in next_states.items()
+            }
+
+        end_scores = current.get((n - 1, m - 1), {})
+        return max(end_scores.values(), default=-1)
