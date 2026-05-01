@@ -42,8 +42,7 @@ class Solution:
                         bucket[new_cost] = max(bucket.get(new_cost, -1), new_score)
 
             current = {
-                cell: prune_frontier(cost_map)
-                for cell, cost_map in next_states.items()
+                cell: prune_frontier(cost_map) for cell, cost_map in next_states.items()
             }
 
         end_scores = current.get((n - 1, m - 1), {})
