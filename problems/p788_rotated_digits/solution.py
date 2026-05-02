@@ -8,11 +8,7 @@ class Solution:
         yess = ["2", "5", "6", "9"]
         # don't matter: 0, 1, 8
 
-        count = 0
-        for i in range(n + 1):
-            if not any(no in str(i) for no in nos) and any(
-                yes in str(i) for yes in yess
-            ):
-                count += 1
-
-        return count
+        return sum(
+            not any(no in str(i) for no in nos) and any(yes in str(i) for yes in yess)
+            for i in range(n + 1)
+        )
